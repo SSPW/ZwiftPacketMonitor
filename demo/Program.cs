@@ -24,25 +24,38 @@ namespace ZwiftPacketMonitorDemo
             var logger = serviceProvider.GetService<ILogger<Program>>();
             var monitor = serviceProvider.GetService<Monitor>();
 
-            monitor.IncomingPlayerEvent += (s, e) =>
-            {
-                logger.LogInformation($"INCOMING: {e.PlayerState}");
-            };
             monitor.OutgoingPlayerEvent += (s, e) =>
             {
                 logger.LogInformation($"OUTGOING: {e.PlayerState}");
+            };
+
+            //monitor.IncomingPlayerEvent += (s, e) =>
+            //{
+            //    logger.LogInformation($"INCOMING: {e.PlayerState}");
+            //};
+            monitor.IncomingPlayerEnteredWorldEvent += (s, e) =>
+            {
+                logger.LogInformation($"WORLD: {e.PlayerUpdate}");
             };
             monitor.IncomingChatMessageEvent += (s, e) =>
             {
                 logger.LogInformation($"CHAT: {e.Message}");
             };
-            monitor.IncomingPlayerEnteredWorldEvent += (s, e) =>
-            {
-                logger.LogInformation($"WORLD: {e.PlayerUpdate}");
-            };
             monitor.IncomingRideOnGivenEvent += (s, e) =>
             {
                 logger.LogInformation($"RIDEON: {e.RideOn}");
+            };
+            monitor.IncomingEventPositionsEvent += (s, e) =>
+            {
+                logger.LogInformation($"EVENTPOS: {e.EventPositions}");
+            };
+            monitor.IncomingMeetupEvent += (s, e) =>
+            {
+                logger.LogInformation($"MEETUP: {e.Meetup}");
+            };
+            monitor.IncomingPlayerTimeSyncEvent += (s, e) =>
+            {
+                logger.LogInformation($"EVENTPOS: {e.TimeSync}");
             };
 
             // Print SharpPcap version
